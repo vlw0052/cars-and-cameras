@@ -12,6 +12,7 @@ import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './app.effects';
+import { DataService } from './services/data.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { AppEffects } from './app.effects';
     }),
     EffectsModule.forRoot([AppEffects])
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
