@@ -1,1 +1,44 @@
-/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files
+@import "~@angular/material/prebuilt-themes/indigo-pink.css"
+
+@mixin tablet
+  @media (min-width: 600px) 
+    @content
+
+@mixin tablet-landscape
+  @media (min-width: 900px) 
+    @content
+
+@mixin desktop
+  @media (min-width: 1200px) 
+    @content
+
+@mixin desktop-large
+  @media (min-width: 1800px) 
+    @content
+
+.card-list
+  display: grid
+  grid-template-columns: 1fr
+  grid-column-gap: 15px
+  @include tablet()
+    grid-template-columns: repeat(2, 1fr)
+  @include tablet-landscape()
+    grid-template-columns: repeat(3, 1fr)
+    @include desktop()
+    grid-template-columns: repeat(5, 1fr)
+  @include desktop-large()
+    grid-template-columns: repeat(6, 1fr)
+
+
+.container, .mat-drawer-container 
+  height: 100%
+.mat-drawer-content
+  padding: 0 15px
+.mat-card
+  max-width: 200px
+  margin-bottom: 20px
+  small
+    position: absolute
+    top: 10px
+    left: 15px
