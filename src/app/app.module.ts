@@ -13,7 +13,7 @@ import { reducers, metaReducers } from './reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './app.effects';
 import { DataService } from './services/data.service';
-
+import { MatCardModule } from '@angular/material/card';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +26,7 @@ import { DataService } from './services/data.service';
     AppRoutingModule,
     RootStoreModule,
     BrowserAnimationsModule,
+    MatCardModule,
     StoreModule.forRoot(reducers, {
       metaReducers,
       runtimeChecks: {
