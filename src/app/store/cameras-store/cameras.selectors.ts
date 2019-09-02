@@ -5,19 +5,14 @@ import {
 } from '@ngrx/store';
 
 import { State } from './cameras.state';
-import { Camera } from 'src/app/models';
-
-const getError = (state: State): string => state.error;
-
-const getIsLoading = (state: State): boolean => state.isLoading;
-
-const getCameras = (state: State): Camera[] => state.items;
+import { Camera } from '../../models';
+import { getItems, getError, getIsLoading } from '../selectors';
 
 export const selectCameraById = id =>
   createSelector(
-    getCameras,
+    getItems,
     cameras => {
-      return cameras[id];
+      return cameras.find(c => c[id] === id);
     }
   );
 
@@ -44,5 +39,5 @@ export const selectCamerasIsLoading: MemoizedSelector<
 
 export const selectCameras: MemoizedSelector<object, Camera[]> = createSelector(
   selectCamerasState,
-  getCameras
+  getItems
 );

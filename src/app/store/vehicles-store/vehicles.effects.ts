@@ -4,20 +4,24 @@ import { Action } from '@ngrx/store';
 import { Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { DataService } from '../../services/data.service';
-import * as CameraActions from './cameras.actions';
+import * as VehicleActions from './vehicles.actions';
 
 @Injectable()
-export class CameraStoreEffects {
+export class VehicleStoreEffects {
   constructor(private dataService: DataService, private actions$: Actions) {}
 
   @Effect()
-  fetchCamerasEffect$: Observable<Action> = this.actions$.pipe(
-    ofType<CameraActions.LoadCameras>(CameraActions.ActionTypes.LOAD_REQUEST),
+  fetchVehiclesEffect$: Observable<Action> = this.actions$.pipe(
+    ofType<VehicleActions.LoadVehicles>(
+      VehicleActions.ActionTypes.LOAD_REQUEST
+    ),
     switchMap(_ =>
-      this.dataService.getCameras().pipe(
-        map(cameras => new CameraActions.LoadCamerasSuccess(cameras)),
+      this.dataService.getVehicles().pipe(
+        map(vehicles => {
+          return new VehicleActions.LoadVehiclesSuccess(vehicles);
+        }),
         catchError(error =>
-          observableOf(new CameraActions.LoadCamerasFailure({ error }))
+          observableOf(new VehicleActions.LoadVehiclesFailure({ error }))
         )
       )
     )
