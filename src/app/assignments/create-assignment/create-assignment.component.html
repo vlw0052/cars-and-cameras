@@ -1,0 +1,32 @@
+<mat-card>
+  <mat-card-title>Create Assignment</mat-card-title>
+  <form
+    #createForm="ngForm"
+    [formGroup]="assignmentForm"
+    (ngSubmit)="onSubmit(createForm)"
+  >
+    <mat-card-content>
+      <mat-form-field>
+        <mat-label>Cameras</mat-label>
+        <mat-select formControlName="camera" id="camera">
+          <mat-option *ngFor="let camera of cameras$ | async" [value]="camera"
+            >{{ camera.deviceNo }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Vehicles</mat-label>
+        <mat-select formControlName="vehicle" id="vehicle">
+          <mat-option
+            *ngFor="let vehicle of vehicles$ | async"
+            [value]="vehicle"
+            >{{ vehicle.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-button type="submit" [disabled]="!assignmentForm.valid">
+        Create
+      </button>
+    </mat-card-content>
+  </form>
+</mat-card>

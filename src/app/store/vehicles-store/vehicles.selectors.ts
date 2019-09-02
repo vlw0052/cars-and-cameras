@@ -9,12 +9,10 @@ import { Vehicle } from '../../models';
 import { getItems, getError, getIsLoading } from '../selectors';
 import { selectAssignments } from '../assignments-store/assignments.selectors';
 
-export const selectVehicleById = id =>
+export const selectVehicleById = (id): MemoizedSelector<object, Vehicle> =>
   createSelector(
-    getItems,
-    vehicles => {
-      return vehicles.find(v => v[id] === id);
-    }
+    selectVehicles,
+    vehicles => vehicles.find(v => v['id'] === id)
   );
 
 export const selectVehiclesState: MemoizedSelector<
@@ -46,7 +44,7 @@ export const selectVehicles: MemoizedSelector<
   getItems
 );
 
-export const selectUnassignedCameras: MemoizedSelector<
+export const selectUnassignedVehicles: MemoizedSelector<
   object,
   Vehicle[]
 > = createSelector(

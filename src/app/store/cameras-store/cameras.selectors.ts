@@ -11,10 +11,8 @@ import { selectAssignments } from '../assignments-store/assignments.selectors';
 
 export const selectCameraById = id =>
   createSelector(
-    getItems,
-    cameras => {
-      return cameras.find(c => c[id] === id);
-    }
+    selectCameras,
+    cameras => cameras.find(c => c['id'] === id)
   );
 
 export const selectCamerasState: MemoizedSelector<

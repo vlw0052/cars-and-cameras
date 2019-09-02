@@ -1,1 +1,5 @@
-<p>cameras works!</p>
+<mat-card *ngFor="let cam of cameras$ | async">
+    <mat-card-title>
+        {{ cam.deviceNo }}
+    </mat-card-title>
+</mat-card>

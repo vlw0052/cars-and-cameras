@@ -47,7 +47,9 @@ export class AssignmentsComponent implements OnInit {
     this.cameras$ = this.store.select(
       CameraStoreSelectors.selectUnassignedCameras
     );
-    this.vehicles$ = this.store.select(VehicleStoreSelectors.selectVehicles);
+    this.vehicles$ = this.store.select(
+      VehicleStoreSelectors.selectUnassignedVehicles
+    );
     this.store.dispatch(new CameraStoreActions.LoadCameras());
     this.store.dispatch(new VehicleStoreActions.LoadVehicles());
   }

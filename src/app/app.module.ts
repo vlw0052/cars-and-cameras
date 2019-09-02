@@ -1,34 +1,36 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { VehiclesComponent } from './vehicles/vehicles.component';
-import { CamerasComponent } from './cameras/cameras.component';
-import { AssignmentsComponent } from './assignments/assignments.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RootStoreModule } from './store/store.module';
-import { ReactiveFormsModule } from '@angular/forms';
-import { StoreModule } from '@ngrx/store';
+import { VehiclesModule } from './vehicles/vehicles.module';
+import { CamerasModule } from './cameras/cameras.module';
 import { reducers, metaReducers } from './reducers';
-import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './app.effects';
 import { DataService } from './services/data.service';
-import { MatCardModule } from '@angular/material/card';
+import { AssignmentsModule } from './assignments/assignments.module';
+
 @NgModule({
-  declarations: [
-    AppComponent,
-    VehiclesComponent,
-    CamerasComponent,
-    AssignmentsComponent
-  ],
+  declarations: [AppComponent],
   imports: [
+    AssignmentsModule,
     BrowserModule,
     AppRoutingModule,
     RootStoreModule,
     BrowserAnimationsModule,
-    MatCardModule,
     ReactiveFormsModule,
+    MatSidenavModule,
+    MatListModule,
+    VehiclesModule,
+    CamerasModule,
     StoreModule.forRoot(reducers, {
       metaReducers,
       runtimeChecks: {
