@@ -1,1 +1,23 @@
-<p>assignments works!</p>
+<h2>Assignments</h2>
+<mat-card>
+  <mat-card-title>Create Assignment</mat-card-title>
+  <form [formGroup]="assignmentForm" (ngSubmit)="onSubmit()">
+    <mat-card-content>
+      <select formControlName="camera" id="camera">
+        <option *ngFor="let camera of cameras$ | async" [ngValue]="camera"
+          >{{ camera.deviceNo }}
+        </option>
+      </select>
+
+      <select formControlName="vehicle" id="vehicle">
+        <option *ngFor="let vehicle of vehicles$ | async" [ngValue]="vehicle"
+          >{{ vehicle.name }}
+        </option>
+      </select>
+      <button type="submit" [disabled]="!assignmentForm.valid">Create</button>
+    </mat-card-content>
+  </form>
+</mat-card>
+<mat-card *ngFor="let assignment of assignments$ | async">
+  {{ assignment.id }} {{ assignment.cameraId }} - {{ assignment.vehicleId }}
+</mat-card>

@@ -8,6 +8,7 @@ import { CamerasComponent } from './cameras/cameras.component';
 import { AssignmentsComponent } from './assignments/assignments.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RootStoreModule } from './store/store.module';
+import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
 import { EffectsModule } from '@ngrx/effects';
@@ -27,6 +28,7 @@ import { MatCardModule } from '@angular/material/card';
     RootStoreModule,
     BrowserAnimationsModule,
     MatCardModule,
+    ReactiveFormsModule,
     StoreModule.forRoot(reducers, {
       metaReducers,
       runtimeChecks: {

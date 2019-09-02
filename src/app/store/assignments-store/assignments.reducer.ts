@@ -49,7 +49,10 @@ const assignmentHandlers = {
   [ActionTypes.ADD_ASSIGNMENT]: (state: State, action: AddAssignment) => ({
     items: [...state.items, action.payload.item]
   }),
-  [ActionTypes.ADD_ASSIGNMENT]: (state: State, action: RemoveAssignment) => ({
+  [ActionTypes.REMOVE_ASSIGNMENT]: (
+    state: State,
+    action: RemoveAssignment
+  ) => ({
     items: setDeletedOnAssignmentFrom(state.items, action.payload.assignmentId)
   })
 };
