@@ -54,6 +54,10 @@ export class AssignmentsComponent implements OnInit {
     this.store.dispatch(new VehicleStoreActions.LoadVehicles());
   }
   removeAssignment(assignment: Assignment) {
-    debugger;
+    this.store.dispatch(
+      new AssignmentStoreActions.RemoveAssignment({
+        assignmentId: assignment.id
+      })
+    );
   }
 }
