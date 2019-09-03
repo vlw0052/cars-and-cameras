@@ -51,7 +51,7 @@ export const selectUnassignedVehicles: MemoizedSelector<
   selectVehicles,
   selectAssignments,
   (vehicles, assignments) => {
-    const assignedCameraIds = assignments.map(a => a.vehicleId);
-    return vehicles.filter(veh => !assignedCameraIds.includes(veh.id));
+    const assignedVehicleIds = assignments.map(a => a.vehicleId);
+    return vehicles.filter(veh => !assignedVehicleIds.includes(veh.id));
   }
 );

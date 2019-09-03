@@ -15,7 +15,6 @@ export const selectAssignmentById = id =>
       return cameras.find(c => c[id] === id);
     }
   );
-
 export const selectAssignmentsState: MemoizedSelector<
   object,
   State
