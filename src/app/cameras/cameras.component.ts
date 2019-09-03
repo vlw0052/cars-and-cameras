@@ -34,7 +34,7 @@ export class CamerasComponent implements OnInit {
     this.store
       .select(
         createSelector(
-          AssignmentStoreSelectors.selectAssignments,
+          AssignmentStoreSelectors.selectActiveAssignments,
           VehicleStoreSelectors.selectVehicles,
           (assignments, vehicles) => ({ assignments, vehicles })
         )

@@ -7,7 +7,7 @@ import {
 import { State } from './vehicles.state';
 import { Vehicle } from '../../models';
 import { getItems, getError, getIsLoading } from '../selectors';
-import { selectAssignments } from '../assignments-store/assignments.selectors';
+import { selectActiveAssignments } from '../assignments-store/assignments.selectors';
 
 export const selectVehicleById = (id): MemoizedSelector<object, Vehicle> =>
   createSelector(
@@ -49,7 +49,7 @@ export const selectUnassignedVehicles: MemoizedSelector<
   Vehicle[]
 > = createSelector(
   selectVehicles,
-  selectAssignments,
+  selectActiveAssignments,
   (vehicles, assignments) => {
     const assignedVehicleIds = assignments.map(a => a.vehicleId);
     return vehicles.filter(veh => !assignedVehicleIds.includes(veh.id));

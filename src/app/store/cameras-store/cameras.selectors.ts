@@ -7,7 +7,7 @@ import {
 import { State } from './cameras.state';
 import { Camera } from '../../models';
 import { getItems, getError, getIsLoading } from '../selectors';
-import { selectAssignments } from '../assignments-store/assignments.selectors';
+import { selectActiveAssignments } from '../assignments-store/assignments.selectors';
 
 export const selectCameraById = id =>
   createSelector(
@@ -46,7 +46,7 @@ export const selectUnassignedCameras: MemoizedSelector<
   Camera[]
 > = createSelector(
   selectCameras,
-  selectAssignments,
+  selectActiveAssignments,
   (cameras, assignments) => {
     const assignedCameraIds = assignments.map(a => a.cameraId);
     return cameras.filter(cam => !assignedCameraIds.includes(cam.id));

@@ -34,7 +34,7 @@ export class VehiclesComponent implements OnInit {
     this.store
       .select(
         createSelector(
-          AssignmentStoreSelectors.selectAssignments,
+          AssignmentStoreSelectors.selectActiveAssignments,
           CameraStoreSelectors.selectCameras,
           (assignments, cameras) => ({ assignments, cameras })
         )
@@ -53,7 +53,6 @@ export class VehiclesComponent implements OnInit {
     return cam;
   }
   assignCameraTo(vehicle: Vehicle, camera: Camera) {
-    console.log(vehicle, camera);
     this.store.dispatch(
       new AssignmentStoreActions.AddAssignment({
         item: createAssignment(camera, vehicle)

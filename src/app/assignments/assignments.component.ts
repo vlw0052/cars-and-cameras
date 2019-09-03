@@ -42,7 +42,7 @@ export class AssignmentsComponent implements OnInit {
   }
   ngOnInit() {
     this.assignments$ = this.store.select(
-      AssignmentStoreSelectors.selectAssignments
+      AssignmentStoreSelectors.selectActiveAssignments
     );
     this.cameras$ = this.store.select(
       CameraStoreSelectors.selectUnassignedCameras
@@ -52,5 +52,8 @@ export class AssignmentsComponent implements OnInit {
     );
     this.store.dispatch(new CameraStoreActions.LoadCameras());
     this.store.dispatch(new VehicleStoreActions.LoadVehicles());
+  }
+  removeAssignment(assignment: Assignment) {
+    debugger;
   }
 }

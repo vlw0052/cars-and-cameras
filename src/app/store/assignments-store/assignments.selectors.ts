@@ -43,3 +43,13 @@ export const selectAssignments: MemoizedSelector<
   selectAssignmentsState,
   getItems
 );
+
+export const selectActiveAssignments: MemoizedSelector<
+  object,
+  Assignment[]
+> = createSelector(
+  selectAssignments,
+  assignments => {
+    return assignments.filter(a => !a.deleted);
+  }
+);

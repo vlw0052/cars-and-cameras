@@ -7,5 +7,7 @@
         <mat-divider></mat-divider>
 
         <display-vehicle [id]="assignment.vehicleId"></display-vehicle>
+
+        <mat-icon (click)="removeAssignment(assignment)" class="remove" title="Remove Assignment" aria-label="Remove Assignment">backspace</mat-icon>
     </mat-card>
 </div>
