@@ -12,14 +12,21 @@
           >Camera</a
         >
         <search-input [searchSubject]="search$"></search-input>
-      </mat-nav-list>
-    </mat-sidenav>
-    <mat-sidenav-content>
-      <search-results *ngIf="showSearch; else routes" [searchQuery]="search$">
-      </search-results>
-      <ng-template #routes>
-        <router-outlet></router-outlet>
-      </ng-template>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+        <a
+          mat-list-item
+          href="https://github.com/vlw0052/cars-and-cameras"
+          target="_blank"
+        >
+          <mat-icon title="Link to Code">help</mat-icon>
+        </a>
+            </mat-nav-list>
+        </mat-sidenav>
+        <mat-sidenav-content>
+            <search-results *ngIf="showSearch; else routes" [searchQuery]="search$">
+            </search-results>
+            <ng-template #routes>
+                <router-outlet></router-outlet>
+            </ng-template>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
 </div>

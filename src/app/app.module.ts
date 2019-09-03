@@ -19,6 +19,7 @@ import { DataService } from './services/data.service';
 import { AssignmentsModule } from './assignments/assignments.module';
 import { MatInputModule } from '@angular/material/input';
 import { SharedModule } from './shared/shared.module';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,7 +32,7 @@ import { SharedModule } from './shared/shared.module';
     ReactiveFormsModule,
     MatSidenavModule,
     MatListModule,
-    MatInputModule,
+    MatIconModule,
     SharedModule,
     FormsModule,
     VehiclesModule,
