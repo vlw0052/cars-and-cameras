@@ -1,12 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Vehicle } from '../models';
+import { Vehicle, Assignment, Camera } from '../models';
 import {
   VehicleStoreSelectors,
   VehicleStoreActions
 } from '../store/vehicles-store';
 import { RootState } from '../store/state';
-import { Store } from '@ngrx/store';
+import { Store, createSelector } from '@ngrx/store';
+import { CameraStoreActions, CameraStoreSelectors } from '../store';
+import {
+  AssignmentStoreSelectors,
+  AssignmentStoreActions
+} from '../store/assignments-store';
+import { createAssignment } from '../store/utils';
 
 @Component({
   selector: 'app-vehicles',
@@ -15,12 +21,43 @@ import { Store } from '@ngrx/store';
 })
 export class VehiclesComponent implements OnInit {
   vehicles$: Observable<Vehicle[]>;
+  unassignedCameras$: Observable<Camera[]>;
+  assignments: Assignment[];
+  cameras: Camera[];
   constructor(private store: Store<RootState>) {}
 
   ngOnInit() {
     this.vehicles$ = this.store.select(VehicleStoreSelectors.selectVehicles);
+    this.unassignedCameras$ = this.store.select(
+      CameraStoreSelectors.selectUnassignedCameras
+    );
+    this.store
+      .select(
+        createSelector(
+          AssignmentStoreSelectors.selectAssignments,
+          CameraStoreSelectors.selectCameras,
+          (assignments, cameras) => ({ assignments, cameras })
+        )
+      )
+      .subscribe(({ assignments, cameras }) => {
+        this.assignments = assignments;
+        this.cameras = cameras;
+      });
     this.store.dispatch(new VehicleStoreActions.LoadVehicles());
+    this.store.dispatch(new CameraStoreActions.LoadCameras());
   }
-
-  getCamera() {}
+  getVehicleAssignment(vehicle: Camera) {
+    const assignment = this.assignments.find(a => a.vehicleId === vehicle.id);
+    if (!assignment) return false;
+    const cam = this.cameras.find(v => v.id === assignment.cameraId);
+    return cam;
+  }
+  assignCameraTo(vehicle: Vehicle, camera: Camera) {
+    console.log(vehicle, camera);
+    this.store.dispatch(
+      new AssignmentStoreActions.AddAssignment({
+        item: createAssignment(camera, vehicle)
+      })
+    );
+  }
 }

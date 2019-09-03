@@ -4,13 +4,14 @@ import { RootState } from '../store/state';
 import { Observable } from 'rxjs';
 import { CameraStoreSelectors, CameraStoreActions } from '../store';
 import { Camera, Assignment, Vehicle } from '../models';
-import { selectAssignments } from '../store/assignments-store/assignments.selectors';
-import { selectVehicles } from '../store/vehicles-store/vehicles.selectors';
 import {
   VehicleStoreSelectors,
   VehicleStoreActions
 } from '../store/vehicles-store';
-import { AssignmentStoreActions } from '../store/assignments-store';
+import {
+  AssignmentStoreActions,
+  AssignmentStoreSelectors
+} from '../store/assignments-store';
 import { createAssignment } from '../store/utils';
 
 @Component({
@@ -30,12 +31,11 @@ export class CamerasComponent implements OnInit {
     this.unassignedVehicles$ = this.store.select(
       VehicleStoreSelectors.selectUnassignedVehicles
     );
-    this.store.dispatch(new CameraStoreActions.LoadCameras());
     this.store
       .select(
         createSelector(
-          selectAssignments,
-          selectVehicles,
+          AssignmentStoreSelectors.selectAssignments,
+          VehicleStoreSelectors.selectVehicles,
           (assignments, vehicles) => ({ assignments, vehicles })
         )
       )
@@ -43,6 +43,7 @@ export class CamerasComponent implements OnInit {
         this.assignments = assignments;
         this.vehicles = vehicles;
       });
+
     this.store.dispatch(new VehicleStoreActions.LoadVehicles());
     this.store.dispatch(new CameraStoreActions.LoadCameras());
   }

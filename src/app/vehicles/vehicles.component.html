@@ -1,6 +1,19 @@
 <h1>Vehicles</h1>
-<mat-card *ngFor="let vh of vehicles$ | async">
-  <mat-card-title>
-    {{ vh.name }}
-  </mat-card-title>
-</mat-card>
+<div class="card-list">
+    <mat-card *ngFor="let vehicle of vehicles$ | async">
+        <small>Vehicle</small>
+        <p>
+            {{ vehicle.name }}
+        </p>
+        <mat-divider></mat-divider>
+        <div *ngIf="getVehicleAssignment(vehicle); else assignCamera">
+            <h5>Assigned To Camera</h5>
+            <p>
+                {{ getVehicleAssignment(vehicle).deviceNo }}
+            </p>
+        </div>
+        <ng-template #assignCamera>
+            <assign-item placeholder="Assign Camera" [options]="unassignedCameras$" displayKey="deviceNo" (assign)="assignCameraTo(vehicle, $event)"></assign-item>
+        </ng-template>
+    </mat-card>
+</div>
