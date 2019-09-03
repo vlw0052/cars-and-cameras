@@ -19,7 +19,6 @@ export class AssignItemComponent implements OnInit {
 
   ngOnInit() {}
   onSubmit() {
-    console.log(this.assignmentForm.controls.selectItem.value);
     this.assign.emit(this.assignmentForm.controls.selectItem.value);
   }
 }
