@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
-import { EventEmitter } from 'events';
-import { FormControl, Validators } from '@angular/forms';
+import { EventEmitter } from '@angular/core';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -12,11 +12,14 @@ export class AssignItemComponent implements OnInit {
   @Input() placeholder: string;
   @Input() options: Observable<any[]>;
   @Input() displayKey: string;
-  @Output() assign: EventEmitter = new EventEmitter();
-  selectFormControl = new FormControl(null, [Validators.required]);
+  @Output() assign: EventEmitter<any> = new EventEmitter();
+  assignmentForm = new FormGroup({
+    selectItem: new FormControl(null, [Validators.required])
+  });
 
   ngOnInit() {}
   onSubmit() {
-    this.assign.emit(this.selectFormControl.value);
+    console.log(this.assignmentForm.controls.selectItem.value);
+    this.assign.emit(this.assignmentForm.controls.selectItem.value);
   }
 }
