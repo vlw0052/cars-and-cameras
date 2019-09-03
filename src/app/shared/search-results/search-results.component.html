@@ -1,12 +1,17 @@
 <h2>Assignment Search</h2>
 <div class="card-list">
-    <mat-card class="assignment" *ngFor="let assignment of filteredItems">
-        <small>Assignment</small>
-        <display-camera [id]="assignment.cameraId"></display-camera>
-        <mat-divider></mat-divider>
-
-        <display-vehicle [id]="assignment.vehicleId"></display-vehicle>
-
-        <mat-icon (click)="removeAssignment(assignment)" class="remove" title="Remove Assignment" aria-label="Remove Assignment">backspace</mat-icon>
+    <mat-card *ngIf="filteredItems.length === 0; else results">
+        <mat-card-title>No Results</mat-card-title>
     </mat-card>
+    <ng-template #results>
+        <mat-card class="assignment" *ngFor="let assignment of filteredItems">
+            <small>Assignment</small>
+            <display-camera [id]="assignment.cameraId"></display-camera>
+            <mat-divider></mat-divider>
+
+            <display-vehicle [id]="assignment.vehicleId"></display-vehicle>
+
+            <mat-icon (click)="removeAssignment(assignment)" class="remove" title="Remove Assignment" aria-label="Remove Assignment">backspace</mat-icon>
+        </mat-card>
+    </ng-template>
 </div>

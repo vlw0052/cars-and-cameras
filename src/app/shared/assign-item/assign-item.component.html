@@ -6,5 +6,5 @@
             </mat-option>
         </mat-select>
     </mat-form-field>
-    <button mat-button>Assign</button>
+    <button mat-button [disabled]="!assignmentForm.valid">Assign</button>
 </form>

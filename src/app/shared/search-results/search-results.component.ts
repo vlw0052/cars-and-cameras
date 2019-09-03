@@ -26,6 +26,7 @@ export class SearchResultsComponent implements OnInit {
   vehicles: Vehicle[];
   assignments: Assignment[];
   filteredItems: Assignment[];
+  currentSearch: string = '';
   constructor(private store: Store<RootState>) {}
 
   ngOnDestroy() {
@@ -52,6 +53,7 @@ export class SearchResultsComponent implements OnInit {
         this.assignments = assignments;
         this.vehicles = vehicles;
         this.cameras = cameras;
+        this.searchStore();
       });
 
     this.store.dispatch(new VehicleStoreActions.LoadVehicles());
@@ -60,22 +62,24 @@ export class SearchResultsComponent implements OnInit {
   }
   subscribeToSearchChange() {
     this.searchQuery.pipe(debounceTime(400)).subscribe(val => {
-      this.searchStore(val);
+      this.currentSearch = val;
+      this.searchStore();
     });
   }
-  searchStore(query: string) {
+  searchStore() {
     let items = [];
     const filteredVehicles = this.vehicles
-      .filter(v => v.name.includes(query))
+      .filter(v => v.name.includes(this.currentSearch))
       .map(v => v.id);
     const filteredCameras = this.cameras
-      .filter(c => c.deviceNo.includes(query))
+      .filter(c => c.deviceNo.includes(this.currentSearch))
       .map(c => c.id);
     this.filteredItems = this.assignments.filter(
       a =>
         filteredCameras.includes(a.cameraId) ||
         filteredVehicles.includes(a.vehicleId)
     );
+    console.log(this.filteredItems);
   }
   removeAssignment(assignment: Assignment) {
     this.store.dispatch(
