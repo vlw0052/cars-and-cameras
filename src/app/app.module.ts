@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
@@ -17,6 +17,8 @@ import { reducers, metaReducers } from './reducers';
 import { AppEffects } from './app.effects';
 import { DataService } from './services/data.service';
 import { AssignmentsModule } from './assignments/assignments.module';
+import { MatInputModule } from '@angular/material/input';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,6 +31,9 @@ import { AssignmentsModule } from './assignments/assignments.module';
     ReactiveFormsModule,
     MatSidenavModule,
     MatListModule,
+    MatInputModule,
+    SharedModule,
+    FormsModule,
     VehiclesModule,
     CamerasModule,
     StoreModule.forRoot(reducers, {

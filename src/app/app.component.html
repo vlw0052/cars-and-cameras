@@ -11,10 +11,15 @@
         <a mat-list-item routerLink="/cameras" routerLinkActive="active"
           >Camera</a
         >
+        <search-input [searchSubject]="search$"></search-input>
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
-      <router-outlet></router-outlet>
+      <search-results *ngIf="showSearch; else routes" [searchQuery]="search$">
+      </search-results>
+      <ng-template #routes>
+        <router-outlet></router-outlet>
+      </ng-template>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>

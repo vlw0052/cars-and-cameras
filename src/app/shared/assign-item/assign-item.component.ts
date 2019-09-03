@@ -17,7 +17,11 @@ export class AssignItemComponent implements OnInit {
     selectItem: new FormControl(null, [Validators.required])
   });
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.options.subscribe(_ => {
+      this.assignmentForm.reset();
+    });
+  }
   onSubmit() {
     this.assign.emit(this.assignmentForm.controls.selectItem.value);
   }
