@@ -52,7 +52,6 @@ export class CamerasComponent implements OnInit {
     return this.vehicles.find(v => v.id === assignment.vehicleId);
   }
   assignVehicleTo(camera: Camera, vehicle: Vehicle) {
-    console.log(camera, vehicle);
     this.store.dispatch(
       new AssignmentStoreActions.AddAssignment({
         item: createAssignment(camera, vehicle)
